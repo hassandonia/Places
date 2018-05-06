@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Places.Views.LoginView"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             BackgroundColor="Black"
+             Title="Login">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding Login}"
+            Padding="8"
+            Spacing="16">
+            <Label
+                FontSize="Large"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                TextColor="#386DBE"
+                Text="CAL Places.."/>
+            <Grid
+                Margin="50,10"
+                BackgroundColor="OrangeRed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Text="Email:"
+                    VerticalOptions="Center"/>
+                <Entry
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Keyboard="Email"
+                    Text="{Binding Email, Mode=TwoWay}"
+                    Placeholder="enter your email here.."/>
+                <Label
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Text="Password:"
+                    VerticalOptions="Center"/>
+                <Entry
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    IsPassword="True"
+                    Text="{Binding Password, Mode=TwoWay}"
+                    Placeholder="enter your password here.."/>
+            </Grid>
+            <StackLayout
+                HorizontalOptions="Center"
+                Orientation="Horizontal">
+                <Label
+                    Text="Remember me. "
+                    VerticalOptions="Center"/>
+                <Switch
+                    IsToggled="{Binding IsToggled, Mode=TwoWay}"/>
+            </StackLayout>
+            <Label
+                HorizontalOptions="Center"
+                Text="Forgot your password?"
+                TextColor="Blue">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding RecoverPasswordCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <ActivityIndicator
+                IsRunning="{Binding IsRunning, Mode=TwoWay}"/>
+            <StackLayout
+                Margin="50,0">
+                <Button
+                Command="{Binding LoginCommand}"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                Text="Login"
+                BackgroundColor="Navy"
+                TextColor="Yellow"
+                IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                HeightRequest="46"
+                BorderRadius="23"/>
+                <Button
+                Command="{Binding RegisterNewUserCommand}"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                Text="Register New User"
+                BackgroundColor="Purple"
+                TextColor="Yellow"
+                IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                HeightRequest="46"
+                BorderRadius="23"/>
+                <Button
+                Command="{Binding LoginWithFacebookCommand}"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                Text="Login With Facebook"
+                BackgroundColor="Blue"
+                TextColor="Yellow"
+                IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                HeightRequest="46"
+                BorderRadius="23"/>
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

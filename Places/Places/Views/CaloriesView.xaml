@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Places"
+             x:Class="Places.Views.CaloriesView">
+    <ContentPage.Content>
+        <StackLayout
+            >
+            <WebView
+                x:Name="Browse"
+                Source="http://www.calculator.net/body-fat-calculator.html"
+                VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+                
+                />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
