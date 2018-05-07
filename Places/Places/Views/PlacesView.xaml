@@ -1,50 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Places.Views.CategoriesView"
-              BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             x:Class="Places.Views.PlacesView"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
              BackgroundColor="Black"
-             Title="Categories">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Command="{Binding NewCategoryCommand}"
-            Icon="ic_add_circle"/>
-    </ContentPage.ToolbarItems>
+             Title="Places">
     <ContentPage.Content>
         <StackLayout
-            BindingContext="{Binding Categories}"
+            BindingContext="{Binding Places}"
             Padding="5">
             <ListView
                 HasUnevenRows="True"
-                ItemsSource="{Binding CategoriesList}">
+                ItemsSource="{Binding Places}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label
+                                <Image
                                     Grid.Column="0"
+                                    HorizontalOptions="Start"
+                                    Source="{Binding ImageFullPath}"
+                                    WidthRequest="100"
+                                    HeightRequest="100"
+                                   />
+                                <Label
+                                    Grid.Column="1"
                                     HorizontalOptions="EndAndExpand"
                                     VerticalOptions="Center"
-                                    FontSize="Large"
+                                    FontSize="Medium"
                                     Text="{Binding Description}"/>
-                                <Image
-                                    Source="ic_chevron_right.png"
-                                    HorizontalOptions="End"
-                                    
-                                    >
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding SelectCategoryCommand}"/>
-                                    </Image.GestureRecognizers>
-                                </Image>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-                
+
             </ListView>
         </StackLayout>
     </ContentPage.Content>

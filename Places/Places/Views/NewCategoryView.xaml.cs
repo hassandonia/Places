@@ -4,9 +4,9 @@
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LoginView : ContentPage
+	public partial class NewCategoryView : ContentPage
 	{
-		public LoginView ()
+		public NewCategoryView ()
 		{
 			InitializeComponent ();
 		}

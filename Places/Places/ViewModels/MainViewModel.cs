@@ -24,6 +24,12 @@
             set;
         }
 
+        public PlacesViewModel Places
+        {
+            get;
+            set;
+        }
+
         #endregion
 
 

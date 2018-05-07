@@ -18,6 +18,7 @@
         #region Services
         ApiService apiService;
         DialogService dialogService;
+        NavigationService navigationService;
         #endregion
 
         #region Attributes
@@ -127,6 +128,11 @@
         {
             apiService = new ApiService();
             dialogService = new DialogService();
+            navigationService = new NavigationService();    
+
+            Email = "hassanbasha200@gmail.com";
+            Password = "123456";
+
             IsEnabled = true;
             IsToggled = true;
             IsRunning = false;
@@ -217,8 +223,8 @@
             var mainViewModel = MainViewModel.GetInstance();
             //mainViewModel.Token = response;
             mainViewModel.Categories = new CategoriesViewModel();
-            await Application.Current.MainPage.Navigation.PushAsync(
-                    new CategoriesView());
+            await navigationService.Navigate("CategoriesView");
+            
 
                 Email = null;
                 Password = null;
