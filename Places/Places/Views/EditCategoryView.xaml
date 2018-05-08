@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Places.Views.EditCategoryView"
+              BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             BackgroundColor="Black"
+             Title="Edit Category">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding EditCategory}"
+            Padding="10">
+            <Label
+                Text="Category"/>
+            <Entry
+                Text="{Binding Description, Mode=TwoWay}"
+                Placeholder="Enter Category Description..."/>
+            <ActivityIndicator
+                IsRunning="{Binding IsRunning, Mode=TwoWay}"
+                VerticalOptions="CenterAndExpand"/>
+            <Button
+                Command="{Binding SaveCommand}"
+                BackgroundColor="Navy"
+                BorderRadius="23"
+                FontAttributes="Bold"
+                HeightRequest="46"
+                IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                Margin="50,0"
+                VerticalOptions="EndAndExpand"
+                Text="Save"
+                TextColor="White"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

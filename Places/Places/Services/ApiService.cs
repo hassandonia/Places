@@ -268,8 +268,11 @@
                     request,
                     Encoding.UTF8,
                     "application/json");
+
                 var client = new HttpClient();
+
                 client.BaseAddress = new Uri(urlBase);
+
                 var url = string.Format("{0}{1}", servicePrefix, controller);
                 var response = await client.PostAsync(url, content);
 
@@ -303,12 +306,12 @@
         }
 
         public async Task<Response> Put<T>(
-            string urlBase,
-            string servicePrefix,
-            string controller,
-            string tokenType,
-            string accessToken,
-            T model)
+               string urlBase,
+               string servicePrefix,
+               string controller,
+               string tokenType,
+               string accessToken,
+               T model)
         {
             try
             {
@@ -353,13 +356,14 @@
             }
         }
 
+
         public async Task<Response> Delete<T>(
-            string urlBase,
-            string servicePrefix,
-            string controller,
-            string tokenType,
-            string accessToken,
-            T model)
+           string urlBase,
+           string servicePrefix,
+           string controller,
+           string tokenType,
+           string accessToken,
+           T model)
         {
             try
             {

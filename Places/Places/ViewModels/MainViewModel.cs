@@ -44,6 +44,12 @@
             get;set;
         }
 
+        public EditCategoryViewModel EditCategory
+        {
+            get;
+            set;    
+        }
+
         #endregion
 
 

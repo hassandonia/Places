@@ -1,5 +1,6 @@
 ﻿namespace Places.API.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -110,7 +111,23 @@
             }
 
             db.Categories.Add(category);
+            try
+            {
             await db.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                if(ex.InnerException != null && ex.InnerException.InnerException != null && ex.InnerException.InnerException.Message.Contains("Index"))
+                {
+                    return BadRequest("Ther are already Record with the same description.!");
+                }
+                else
+                {
+                    return BadRequest(ex.Message);
+                }
+                
+            }
+            
 
             return CreatedAtRoute("DefaultApi", new { id = category.CategoryId }, category);
         }

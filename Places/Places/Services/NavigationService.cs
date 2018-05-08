@@ -3,7 +3,6 @@
     using Views;
     using System.Threading.Tasks;
     using Xamarin.Forms;
-    using System;
 
     public class NavigationService
     {
@@ -24,6 +23,11 @@
                 case "NewCategoryView":
                     await Application.Current.MainPage.Navigation.PushAsync(
                    new NewCategoryView());
+                    break;
+
+                case "EditCategoryVie":
+                    await Application.Current.MainPage.Navigation.PushAsync(
+                   new EditCategoryView());
                     break;
             }
             
