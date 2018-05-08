@@ -1,8 +1,17 @@
 ﻿namespace Places.ViewModels
 {
+    using GalaSoft.MvvmLight.Command;
     using Models;
+    using Services;
+    using System.Windows.Input;
+
     public class MainViewModel
     {
+
+        #region Services
+
+        NavigationService navigationService;
+        #endregion
 
         #region Proerties
 
@@ -30,6 +39,11 @@
             set;
         }
 
+        public NewCategoryViewModel NewCategory
+        {
+            get;set;
+        }
+
         #endregion
 
 
@@ -38,6 +52,9 @@
         public MainViewModel()
         {
             instance = this;
+
+            navigationService = new NavigationService();
+
             Login = new LoginViewModel();
         }
         #endregion
@@ -56,6 +73,24 @@
         }
         #endregion
 
+
+            #region Commands
+
+        public ICommand NewCategoryCommand
+        {
+            get
+            {
+                return new RelayCommand(GoNewCategory);
+            }
+        }
+
+        async void GoNewCategory()
+        {
+            NewCategory = new NewCategoryViewModel();
+            await navigationService.Navigate("NewCategoryView");
+        }
+
+        #endregion
 
     }
 }
