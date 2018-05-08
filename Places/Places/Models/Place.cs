@@ -6,6 +6,8 @@
     {
         public int PlaceId { get; set; }
 
+        public int CategoryId { get; set; }
+
         public string Description { get; set; }
 
         public string Image { get; set; }
@@ -24,13 +26,15 @@
         {
             get
             {
+
+                if (string.IsNullOrEmpty(Image))
+                {
+                    return "ic_add_circle";
+                }
                 return string.Format("http://localhost:50552/{0}",
                     Image.Substring(1));
             }
-            set
-            {
-
-            }
+          
         }
     }
 }

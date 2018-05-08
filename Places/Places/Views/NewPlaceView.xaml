@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Places.Views.NewPlaceView"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             BackgroundColor="Black"
+             Title="New Place">
+    <ContentPage.Content>
+        <StackLayout
+            Padding="10">
+            <Label Text="Place:"
+                 />
+            <Entry
+                Text="{Binding Description, Mode=TwoWay}"
+                Placeholder="enter the place description.."/>
+            <Label Text="Price:"/>
+            <Entry
+                Keyboard="Numeric"
+                Text="{Binding Price, Mode=TwoWay}"
+                Placeholder="Enter Place price.."/>
+            <StackLayout
+                Orientation="Horizontal">
+                <Label
+                    HorizontalOptions="StartAndExpand"
+                    Text="Is Active?"
+                    VerticalOptions="Center"/>
+                <Switch
+                    HorizontalOptions="End"
+                    IsToggled="{Binding IsActive, Mode=TwoWay}"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+            <Label
+                    Text="Last Purchase:"/>
+            <DatePicker
+                Date="{Binding LastPurchase, Mode=TwoWay}"
+                />
+            <Label
+                Text="Stock"/>
+            <Entry
+                Keyboard="Numeric"
+                Text="{Binding Stock, Mode=TwoWay}"
+                Placeholder="enter place stock.."/>
+            <Label
+                Text="Remarks:"/>
+            <Image
+                HeightRequest="200"
+                Source="{Binding Image, Mode=TwoWay}"
+                WidthRequest="200"/>
+            <ActivityIndicator
+                IsRunning="{Binding IsRunning, Mode=TwoWay}"
+                VerticalOptions="CenterAndExpand"/>
+            <Button
+                Command="{Binding SaveCommand}"
+                BackgroundColor="Navy"
+                BorderRadius="23"
+                FontAttributes="Bold"
+                HeightRequest="46"
+                IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                Margin="50,0"
+                Text="Save"
+                TextColor="White"
+                VerticalOptions="EndAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

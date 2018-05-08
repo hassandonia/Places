@@ -4,7 +4,7 @@
              x:Class="Places.Views.PlacesView"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              BackgroundColor="Black"
-             Title="Places">
+             Title="{Binding Category.Description}">
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Places}"

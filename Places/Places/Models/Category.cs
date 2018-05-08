@@ -64,7 +64,7 @@
             {
                 return;
             }
-            CategoriesViewModel.GetInstance().DeleteCategory(this);
+            await CategoriesViewModel.GetInstance().DeleteCategory(this);
         }
 
 
@@ -98,6 +98,7 @@
         {
 
             var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.Category = this;
             mainViewModel.Places = new PlacesViewModel(Places);
             await navigationService.Navigate("PlacesView");
 

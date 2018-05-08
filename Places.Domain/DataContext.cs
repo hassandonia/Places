@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Places.Domain
 {
@@ -8,6 +9,12 @@ namespace Places.Domain
         {
                 
         }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        //}
+
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Place> Places { get; set; }
