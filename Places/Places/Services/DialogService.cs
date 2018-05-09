@@ -23,5 +23,15 @@
                 "No");
 
         }
+
+        public async Task<string> ShowImageOptions()
+        {
+            return await Application.Current.MainPage.DisplayActionSheet(
+                "where do you take the image?",
+                "Cancel",
+                null,
+                "From Gallery",
+                "From Camera");
+        }
     }
 }
