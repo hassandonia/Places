@@ -1,10 +1,14 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Places.API.Helpers;
+using Places.API.Models;
 using Places.Domain;
 
 namespace Places.API.Controllers
@@ -70,17 +74,66 @@ namespace Places.API.Controllers
 
         // POST: api/Places
         [ResponseType(typeof(Place))]
-        public async Task<IHttpActionResult> PostPlace(Place place)
+        public async Task<IHttpActionResult> PostPlace(PlaceRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            if (request.ImageArray != null && request.ImageArray.Length > 0)
+            {
+                var stream = new MemoryStream(request.ImageArray);
+                var guid = Guid.NewGuid().ToString();
+                var file = string.Format("{0}.jpg", guid);
+                var folder = "~/Content/Images";
+                var fullPath = string.Format("{0}/{1}", folder, file);
+                var response = FilesHelper.UploadPhoto(stream, folder, file);
+
+                if (response)
+                {
+                    request.Image = fullPath;
+                }
+            }
+
+            var place = ToPlace(request);
             db.Places.Add(place);
-            await db.SaveChangesAsync();
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException != null &&
+                    ex.InnerException.InnerException != null &&
+                    ex.InnerException.InnerException.Message.Contains("Index"))
+                {
+                    return BadRequest("There are a record with the same description.");
+                }
+                else
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
 
             return CreatedAtRoute("DefaultApi", new { id = place.PlaceId }, place);
+        }
+
+        private Place ToPlace(PlaceRequest request)
+        {
+            return new Place
+            {
+                Category = request.Category,
+                CategoryId = request.CategoryId,
+                Description = request.Description,
+                Image = request.Image,
+                IsActive = request.IsActive,
+                LastPurchase = request.LastPurchase,
+                Price = request.Price,
+                PlaceId = request.PlaceId,
+                Remarks = request.Remarks,
+                Stock = request.Stock,
+            };
         }
 
         // DELETE: api/Places/5

@@ -6,7 +6,7 @@
     using Services;
     using Xamarin.Forms;
     using Views;
-    
+    using System;
 
     public class LoginViewModel : INotifyPropertyChanged
     {
@@ -232,7 +232,22 @@
                 IsRunning = false;
                 IsEnabled = true;
             }
-            #endregion
+
+
+
+        public ICommand RegisterNewUserCommand
+        {
+            get {
+                return new RelayCommand(RegisterNewUser);
+                    }
         }
+
+        async void RegisterNewUser()
+        {
+            MainViewModel.GetInstance().NewCustomer = new NewCustomerViewModel();
+            await navigationService.Navigate("NewCustomerView");
+        }
+        #endregion
+    }
     }
 

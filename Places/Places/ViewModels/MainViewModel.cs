@@ -50,10 +50,21 @@
             set;    
         }
 
+        public EditPlaceViewModel EditPlace
+        {
+            get;
+            set;
+        }
+
         public Category Category
         {
             get;
             set;    
+        }
+
+        public NewCustomerViewModel NewCustomer
+        {
+            get;set;
         }
 
         #endregion

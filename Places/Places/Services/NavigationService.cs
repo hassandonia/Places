@@ -29,6 +29,26 @@
                     await Application.Current.MainPage.Navigation.PushAsync(
                    new EditCategoryView());
                     break;
+
+                case "NewPlaceView":
+                    await Application.Current.MainPage.Navigation.PushAsync(
+                   new NewPlaceView());
+                    break;
+
+                case "EditPlaceView":
+                    await Application.Current.MainPage.Navigation.PushAsync(
+                   new EditPlaceView());
+                    break;
+
+                case "NewCustomerView":
+                    await Application.Current.MainPage.Navigation.PushAsync(
+                   new NewCustomerView());
+                    break;
+
+                case "CaloriesView":
+                    await Application.Current.MainPage.Navigation.PushAsync(
+                   new CaloriesView());
+                    break;
             }
             
         }

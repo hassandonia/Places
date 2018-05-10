@@ -1,18 +1,21 @@
 ﻿namespace Places.ViewModels
 {
-    using GalaSoft.MvvmLight.Command;
-    using Places.Models;
-    using Places.Services;
-    using Plugin.Media;
-    using Plugin.Media.Abstractions;
+
     using System;
     using System.ComponentModel;
     using System.Windows.Input;
-    using Xamarin.Forms;
+    using GalaSoft.MvvmLight.Command;
     using Helpers;
+    using Models;
+    using Plugin.Media;
+    using Plugin.Media.Abstractions;
+    using Services;
+    using Xamarin.Forms;
 
-    public class NewPlaceViewModel : INotifyPropertyChanged
+
+    public class EditPlaceViewModel : INotifyPropertyChanged
     {
+
         #region Events
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
@@ -26,27 +29,12 @@
         #region Attributes
         bool _isRunning;
         bool _isEnabled;
+        Place place;
         ImageSource _imageSource;
         MediaFile file;
         #endregion
 
         #region Properties
-        
-        public ImageSource ImageSource
-        {
-            set
-            {
-                if(_imageSource != value)
-                {
-                    _imageSource = value;PropertyChanged?.Invoke(this,
-                        new PropertyChangedEventArgs(nameof(ImageSource)));
-                }
-            }
-            get
-            {
-                return _imageSource;
-            }
-        }
 
         public bool IsEnabled
         {
@@ -84,6 +72,22 @@
             }
         }
 
+        public ImageSource ImageSource
+        {
+            set
+            {
+                if (_imageSource != value)
+                {
+                    _imageSource = value; PropertyChanged?.Invoke(this,
+                         new PropertyChangedEventArgs(nameof(ImageSource)));
+                }
+            }
+            get
+            {
+                return _imageSource;
+            }
+        }
+
         public string Description { get; set; }
 
         public string Price { get; set; }
@@ -97,18 +101,26 @@
         public string Remarks { get; set; }
 
         public string Image { get; set; }
+
         #endregion
 
         #region Constructors
-        public NewPlaceViewModel()
+
+        public EditPlaceViewModel(Place place)
         {
+            this.place = place;
+
             apiService = new ApiService();
             dialogService = new DialogService();
             navigationService = new NavigationService();
 
-            ImageSource = "ic_add_circle";
-            IsActive = true;
-            LastPurchase = DateTime.Today;
+            Description = place.Description;
+            ImageSource = place.ImageFullPath;
+            Price = place.Price.ToString();
+            IsActive = place.IsActive;
+            LastPurchase = place.LastPurchase;
+            Stock = place.Stock.ToString();
+            Remarks = place.Remarks;
 
             IsEnabled = true;
         }
@@ -191,14 +203,14 @@
             }
 
             var price = decimal.Parse(Price);
-            if(price < 0)
+            if (price < 0)
             {
                 await dialogService.ShowMessage("Error",
                     "The price must be a value greater or equals than zero.");
                 return;
             }
             var stock = double.Parse(Stock);
-            if(stock < 0)
+            if (stock < 0)
             {
                 await dialogService.ShowMessage("Error",
                     "The stock must be a value greater or equals than zero");
@@ -215,16 +227,16 @@
                 await dialogService.ShowMessage("Error", connection.Message);
                 return;
             }
+            var mainViewModel = MainViewModel.GetInstance();
+
 
             byte[] imageArray = null;
-            if(file != null)
+            if (file != null)
             {
                 imageArray = FilesHelper.ReadFully(file.GetStream());
                 file.Dispose();
             }
-
-            var mainViewModel = MainViewModel.GetInstance();
-
+            
             var place = new Place
             {
                 CategoryId = mainViewModel.Category.CategoryId,
@@ -236,7 +248,7 @@
                 Remarks = Remarks,
                 Stock = stock,
             };
-            var response = await apiService.Post(
+            var response = await apiService.Put(
                 "",
                 "/api",
                 "Places",
@@ -252,8 +264,12 @@
                      response.Message);
                 return;
             }
+            //PlacesViewModel.Update(place);
+            await navigationService.Back();
+
+            IsRunning = false;
+            IsEnabled = true;
         }
         #endregion
-
     }
 }
