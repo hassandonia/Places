@@ -6,56 +6,87 @@
 
     public class NavigationService
     {
-        public async Task Navigate(string pageName)
+        public void setMainPage(string pageName)
         {
             switch (pageName)
             {
+                case "LoginView":
+                    Application.Current.MainPage = new NavigationPage(new LoginView());
+                    break;
+
+                case "MasterView":
+                    Application.Current.MainPage = new MasterView();
+                    break;
+            }
+        }
+
+        public async Task NavigateOnMaster(string pageName)
+        {
+
+            App.Master.IsPresented = false;
+
+            switch (pageName)
+            {
                 case "CategoriesView":
-                    await Application.Current.MainPage.Navigation.PushAsync(
+                    await App.Navigator.PushAsync(
                    new CategoriesView());
                     break;
 
                 case "PlacesView":
-                    await Application.Current.MainPage.Navigation.PushAsync(
+                    await App.Navigator.PushAsync(
                    new PlacesView());
                     break;
 
                 case "NewCategoryView":
-                    await Application.Current.MainPage.Navigation.PushAsync(
+                    await App.Navigator.PushAsync(
                    new NewCategoryView());
                     break;
 
                 case "EditCategoryVie":
-                    await Application.Current.MainPage.Navigation.PushAsync(
+                    await App.Navigator.PushAsync(
                    new EditCategoryView());
                     break;
 
                 case "NewPlaceView":
-                    await Application.Current.MainPage.Navigation.PushAsync(
+                    await App.Navigator.PushAsync(
                    new NewPlaceView());
                     break;
 
                 case "EditPlaceView":
-                    await Application.Current.MainPage.Navigation.PushAsync(
+                    await App.Navigator.PushAsync(
                    new EditPlaceView());
                     break;
 
+             
+            }
+            
+        }
+
+        public async Task NavigateOnLogin(string pageName)
+        {
+            switch (pageName)
+            {
                 case "NewCustomerView":
                     await Application.Current.MainPage.Navigation.PushAsync(
                    new NewCustomerView());
                     break;
 
-                case "CaloriesView":
-                    await Application.Current.MainPage.Navigation.PushAsync(
-                   new CaloriesView());
-                    break;
+                //case "CaloriesView":
+                    //await Application.Current.MainPage.Navigation.PushAsync(
+                   //new CaloriesView());
+                    //break;
             }
-            
+
         }
 
-        public async Task Back()
+        public async Task BackOnMaster()
         {
             await Application.Current.MainPage.Navigation.PopAsync();
+        }
+
+        public async Task BackOnLogin()
+        {
+            await App.Navigator.PopAsync();
         }
     }
 }

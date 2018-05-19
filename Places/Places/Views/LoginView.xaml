@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Places.Views.LoginView"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             BackgroundColor="Black"
+             BackgroundColor="{StaticResource AccentColor2}"
              Title="Login">
     <ContentPage.Content>
         <StackLayout
@@ -14,11 +14,16 @@
                 FontSize="Large"
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
-                TextColor="#386DBE"
+                TextColor="{StaticResource FontColor}"
                 Text="CAL Places.."/>
+            <Image
+                Source="hkhkkaaaa.jpg"
+                WidthRequest="60"
+                HeightRequest="60"
+                HorizontalOptions="Center"/>
             <Grid
                 Margin="50,10"
-                BackgroundColor="OrangeRed">
+                >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
@@ -26,23 +31,27 @@
                 <Label
                     Grid.Column="0"
                     Grid.Row="0"
+                    TextColor="{StaticResource FontColor}"
                     Text="Email:"
                     VerticalOptions="Center"/>
                 <Entry
                     Grid.Column="1"
                     Grid.Row="0"
                     Keyboard="Email"
+                    BackgroundColor="{StaticResource MainColor}"
                     Text="{Binding Email, Mode=TwoWay}"
                     Placeholder="enter your email here.."/>
                 <Label
                     Grid.Column="0"
                     Grid.Row="1"
                     Text="Password:"
+                    TextColor="{StaticResource FontColor}"
                     VerticalOptions="Center"/>
                 <Entry
                     Grid.Column="1"
                     Grid.Row="1"
                     IsPassword="True"
+                    BackgroundColor="{StaticResource MainColor}"
                     Text="{Binding Password, Mode=TwoWay}"
                     Placeholder="enter your password here.."/>
             </Grid>
@@ -51,6 +60,7 @@
                 Orientation="Horizontal">
                 <Label
                     Text="Remember me. "
+                    TextColor="{StaticResource FontColor}"
                     VerticalOptions="Center"/>
                 <Switch
                     IsToggled="{Binding IsToggled, Mode=TwoWay}"/>
@@ -58,7 +68,7 @@
             <Label
                 HorizontalOptions="Center"
                 Text="Forgot your password?"
-                TextColor="Blue">
+                TextColor="{StaticResource MainColor}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding RecoverPasswordCommand}"/>
                 </Label.GestureRecognizers>
@@ -72,7 +82,7 @@
                 FontSize="Medium"
                 FontAttributes="Bold"
                 Text="Login"
-                BackgroundColor="Navy"
+                BackgroundColor="{StaticResource AccentColor1}"
                 TextColor="Yellow"
                 IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                 HeightRequest="46"
@@ -82,7 +92,7 @@
                 FontSize="Medium"
                 FontAttributes="Bold"
                 Text="Register New User"
-                BackgroundColor="Purple"
+                BackgroundColor="{StaticResource AccentColor2}"
                 TextColor="Yellow"
                 IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                 HeightRequest="46"

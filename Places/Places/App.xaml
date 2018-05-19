@@ -13,11 +13,11 @@
             <infra:InstanceLocator x:Key="Locator"/>
             
             <!--Colors-->
-            <Color x:Key="MainColor">#11BD9</Color>
-            <Color x:Key="FontColor">#0ADDDD</Color>
-            <Color x:Key="AccentColor1">#B21000</Color>
+            <Color x:Key="MainColor">#110DD9</Color>
+            <Color x:Key="FontColor">#B21000</Color>
+            <Color x:Key="AccentColor1">#100DA4</Color>
             <Color x:Key="AccentColor2">#0B0A75</Color>
-            <Color x:Key="BackgroundColor">#0ADDDD</Color>
+            <Color x:Key="BackgroundColor">#1a6ffd</Color>
             
         </ResourceDictionary>
 

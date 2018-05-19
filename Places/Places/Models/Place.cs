@@ -1,6 +1,7 @@
 ﻿namespace Places.Models
 {
     using System;
+    using System.Windows.Input;
 
     public class Place
     {
@@ -38,5 +39,7 @@
             }
           
         }
+
+       
     }
 }

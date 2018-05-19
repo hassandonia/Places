@@ -3,6 +3,8 @@
     using GalaSoft.MvvmLight.Command;
     using Models;
     using Services;
+    using System;
+    using System.Collections.ObjectModel;
     using System.Windows.Input;
 
     public class MainViewModel
@@ -14,6 +16,13 @@
         #endregion
 
         #region Proerties
+
+        public ObservableCollection<Menu> MyMenu
+        {
+            get;
+            set;
+        }
+
 
         public LoginViewModel Login
         {
@@ -66,7 +75,7 @@
         {
             get;set;
         }
-
+        
         #endregion
 
 
@@ -79,7 +88,9 @@
             navigationService = new NavigationService();
 
             Login = new LoginViewModel();
+            LoadMenu();
         }
+        
         #endregion
 
         #region Sigleton
@@ -97,7 +108,50 @@
         #endregion
 
 
-            #region Commands
+        #region Methods
+
+        private void LoadMenu()
+        {
+            MyMenu = new ObservableCollection<Menu>();
+            MyMenu.Add(new Menu
+            {
+                Icon = "ic_settings.png",
+                PageName = "My Profile",
+                Title = "Profile"
+            });
+
+            MyMenu.Add(new Menu
+            {
+                Icon = "ic_map.png",
+                PageName = "Places Map",
+                Title = "Maps"
+            });
+
+            MyMenu.Add(new Menu
+            {
+                Icon = "ic_exit_to_app.png",
+                PageName = "LoginView",
+                Title = "Close"
+            });
+        }
+
+        #endregion
+
+        #region Commands
+
+        public ICommand NewPlaceCommand
+        {
+            get
+            {
+                return new RelayCommand(GoNewPlace);
+            }
+        }
+
+        async void GoNewPlace()
+        {
+            NewPlace = new NewPlaceViewModel();
+            await navigationService.NavigateOnMaster("NewPlaceView");
+        }
 
         public ICommand NewCategoryCommand
         {
@@ -107,10 +161,12 @@
             }
         }
 
+        public NewPlaceViewModel NewPlace { get; private set; }
+
         async void GoNewCategory()
         {
             NewCategory = new NewCategoryViewModel();
-            await navigationService.Navigate("NewCategoryView");
+            await navigationService.NavigateOnMaster("NewCategoryView");
         }
 
         #endregion

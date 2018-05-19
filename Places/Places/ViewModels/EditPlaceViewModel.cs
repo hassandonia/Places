@@ -265,11 +265,13 @@
                 return;
             }
             //PlacesViewModel.Update(place);
-            await navigationService.Back();
+            await navigationService.BackOnMaster();
 
             IsRunning = false;
             IsEnabled = true;
         }
+
+      
         #endregion
     }
 }

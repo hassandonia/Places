@@ -2,7 +2,6 @@
 using Places.Helpers;
 using Places.Models;
 using Places.Services;
-using System;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -239,8 +238,8 @@ namespace Places.ViewModels
             mainViewModel.Token = response2;
             
             mainViewModel.Categories = new CategoriesViewModel();
-            await navigationService.Back();
-            await navigationService.Navigate("CategoriesView");
+            await navigationService.BackOnLogin();
+            navigationService.setMainPage("MasterView");
 
             IsRunning = false;
             IsEnabled = true;

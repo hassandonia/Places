@@ -82,7 +82,7 @@
         {
             MainViewModel.GetInstance().EditCategory =
                 new EditCategoryViewModel(this);
-            await navigationService.Navigate("EditCategoryView");
+            await navigationService.NavigateOnMaster("EditCategoryView");
         }
 
         public ICommand SelectCategoryCommand
@@ -100,7 +100,7 @@
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Category = this;
             mainViewModel.Places = new PlacesViewModel(Places);
-            await navigationService.Navigate("PlacesView");
+            await navigationService.NavigateOnMaster("PlacesView");
 
         }
         #endregion

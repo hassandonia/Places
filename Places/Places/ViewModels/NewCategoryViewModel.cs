@@ -1,7 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Places.Models;
 using Places.Services;
-using System;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -138,7 +137,7 @@ namespace Places.ViewModels
             var categoriesViewModel = CategoriesViewModel.GetInstance();
             categoriesViewModel.AddCategory(category);
 
-            await navigationService.Back();
+            await navigationService.BackOnMaster();
             IsEnabled = true;
             IsRunning = false;
         }

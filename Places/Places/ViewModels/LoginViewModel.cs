@@ -187,43 +187,43 @@
             IsRunning = true;
             IsEnabled = false;
 
-            //var connection = await apiService.CheckConnection();
+            var connection = await apiService.CheckConnection();
 
-            //if (!connection.IsSuccess)
-            //{
-            //IsRunning = true;
-            //IsEnabled = true;
-            //await dialogService.ShowMessage("Error", connection.Message);
-            //return;
-            //}
-            //var response = await apiService.GetToken("localhost:50552/",
-            //Email,
-            //Password);
+            if (!connection.IsSuccess)
+            {
+            IsRunning = true;
+            IsEnabled = true;
+            await dialogService.ShowMessage("Error", connection.Message);
+            return;
+            }
+            var response = await apiService.GetToken("localhost:50552/",
+            Email,
+            Password);
 
-            //if(response == null)
-            //{
-            //IsRunning = false;
-            //IsEnabled = true;
-            //await dialogService.ShowMessage("Error",
-            //"The service is not available, please try again later.");
-            //Password = null;
-            //return;
-            //}
+            if(response == null)
+            {
+            IsRunning = false;
+            IsEnabled = true;
+            await dialogService.ShowMessage("Error",
+            "The service is not available, please try again later.");
+            Password = null;
+            return;
+            }
 
-            //if (string.IsNullOrEmpty(response.AccessToken))
-            //{
-            //IsRunning = false;
-            //IsEnabled = true;
-            //await dialogService.ShowMessage("Error",
-            //response.ErrorDescription);
-            //Password = null;
-            //return;
-            //}
+            if (string.IsNullOrEmpty(response.AccessToken))
+            {
+            IsRunning = false;
+            IsEnabled = true;
+            await dialogService.ShowMessage("Error",
+            response.ErrorDescription);
+            Password = null;
+            return;
+            }
 
             var mainViewModel = MainViewModel.GetInstance();
-            //mainViewModel.Token = response;
+            mainViewModel.Token = response;
             mainViewModel.Categories = new CategoriesViewModel();
-            await navigationService.Navigate("CategoriesView");
+            navigationService.setMainPage("MasterView");
             
 
                 Email = null;
@@ -245,7 +245,7 @@
         async void RegisterNewUser()
         {
             MainViewModel.GetInstance().NewCustomer = new NewCustomerViewModel();
-            await navigationService.Navigate("NewCustomerView");
+            await navigationService.NavigateOnLogin("NewCustomerView");
         }
         #endregion
     }
