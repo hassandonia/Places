@@ -7,7 +7,7 @@ using Places.Domain;
 
 namespace Places.Backend.Controllers
 {
-    [Authorize(Users ="hassanbasha200@gmail.com")]
+    //[Authorize(Users ="hassanbasha@gmail.com")]
     public class CategoriesController : Controller
     {
         private DataContextLocal db = new DataContextLocal();

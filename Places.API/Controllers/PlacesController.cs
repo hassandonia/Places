@@ -13,7 +13,7 @@ using Places.Domain;
 
 namespace Places.API.Controllers
 {
-    [Authorize(Users = "hassanbasha200@gmail.com")]
+    //[Authorize(Users = "hassanbasha200@gmail.com")]
     public class PlacesController : ApiController
     {
         private DataContext db = new DataContext();

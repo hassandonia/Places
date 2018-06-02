@@ -19,6 +19,5 @@ namespace Places.Domain
 
         public DbSet<Place> Places { get; set; }
 
-        public System.Data.Entity.DbSet<Places.Domain.Customer> Customers { get; set; }
     }
 }

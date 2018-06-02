@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
-    <Compile Include="Customer.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Place.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

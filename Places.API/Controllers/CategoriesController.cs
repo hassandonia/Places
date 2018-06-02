@@ -11,7 +11,7 @@
     using Domain;
     using Models;
 
-    [Authorize(Users = "hassanbasha200@gmail.com")]
+    //[Authorize(Users = "hassanbasha200@gmail.com")]
     public class CategoriesController : ApiController
     {
         private DataContext db = new DataContext();
