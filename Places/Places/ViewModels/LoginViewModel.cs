@@ -130,8 +130,8 @@
             dialogService = new DialogService();
             navigationService = new NavigationService();    
 
-            Email = "hassanbasha200@gmail.com";
-            Password = "123456";
+            //Email = "hassanbasha@gmail.com";
+            //Password = "123456";
 
             IsEnabled = true;
             IsToggled = true;
@@ -140,7 +140,82 @@
         #endregion
 
         #region Commands
+        public ICommand LoginCommand
+        {
+            get
+            {
+                return new RelayCommand(Login);
+            }
+        }
 
+        async void Login()
+        {
+            if (string.IsNullOrEmpty(Email))
+            {
+                IsRunning = true;
+                await dialogService.ShowMessage(
+                "Error",
+                "You must enter valid email.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(Password))
+            {
+                IsRunning = true;
+                await dialogService.ShowMessage(
+                "Error",
+                "You must enter valid password.");
+                return;
+            }
+            IsRunning = true;
+            IsEnabled = false;
+
+            var connection = await apiService.CheckConnection();
+
+            if (!connection.IsSuccess)
+            {
+                IsRunning = true;
+                IsEnabled = true;
+                await dialogService.ShowMessage("Error", connection.Message);
+                return;
+            }
+            var response = await apiService.GetToken(
+                "https://placesapii.azurewebsites.net",
+            Email,
+            Password);
+
+            if (response == null)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await dialogService.ShowMessage("Error",
+                "The service is not available, please try again later.");
+                Password = null;
+                return;
+            }
+
+            if (string.IsNullOrEmpty(response.AccessToken))
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await dialogService.ShowMessage("Error",
+                response.ErrorDescription);
+                Password = null;
+                return;
+            }
+
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.Token = response;
+            mainViewModel.Categories = new CategoriesViewModel();
+            navigationService.setMainPage("MasterView");
+
+
+            Email = null;
+            Password = null;
+
+            IsRunning = false;
+            IsEnabled = true;
+        }
         public ICommand LoginWithFacebookCommand
         {
             get
@@ -157,81 +232,7 @@
                     new CaloriesView());
         }
 
-        public ICommand LoginCommand
-        {
-            get
-            {
-                return new RelayCommand(Login);
-            }
-        }
-
-        async void Login()
-        {
-            if (string.IsNullOrEmpty(Email))
-            {
-            IsRunning = true;
-            await dialogService.ShowMessage(
-            "Error",
-            "You must enter valid email.");
-            return;
-            }
-
-            if (string.IsNullOrEmpty(Password))
-            {
-            IsRunning = true;
-            await dialogService.ShowMessage(
-            "Error",
-            "You must enter valid password.");
-            return;
-            }
-            IsRunning = true;
-            IsEnabled = false;
-
-            var connection = await apiService.CheckConnection();
-
-            if (!connection.IsSuccess)
-            {
-            IsRunning = true;
-            IsEnabled = true;
-            await dialogService.ShowMessage("Error", connection.Message);
-            return;
-            }
-            var response = await apiService.GetToken("localhost:50552/",
-            Email,
-            Password);
-
-            if(response == null)
-            {
-            IsRunning = false;
-            IsEnabled = true;
-            await dialogService.ShowMessage("Error",
-            "The service is not available, please try again later.");
-            Password = null;
-            return;
-            }
-
-            if (string.IsNullOrEmpty(response.AccessToken))
-            {
-            IsRunning = false;
-            IsEnabled = true;
-            await dialogService.ShowMessage("Error",
-            response.ErrorDescription);
-            Password = null;
-            return;
-            }
-
-            var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.Token = response;
-            mainViewModel.Categories = new CategoriesViewModel();
-            navigationService.setMainPage("MasterView");
-            
-
-                Email = null;
-                Password = null;
-
-                IsRunning = false;
-                IsEnabled = true;
-            }
+     
 
 
 

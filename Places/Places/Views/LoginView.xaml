@@ -15,7 +15,7 @@
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
                 TextColor="{StaticResource FontColor}"
-                Text="CAL Places.."/>
+                Text="CAL SHOP.."/>
             <Image
                 Source="hkhkkaaaa.jpg"
                 WidthRequest="60"
@@ -40,7 +40,8 @@
                     Keyboard="Email"
                     BackgroundColor="{StaticResource MainColor}"
                     Text="{Binding Email, Mode=TwoWay}"
-                    Placeholder="enter your email here.."/>
+                    Placeholder="enter your email here.."
+                    TextColor="White"/>
                 <Label
                     Grid.Column="0"
                     Grid.Row="1"
@@ -53,7 +54,8 @@
                     IsPassword="True"
                     BackgroundColor="{StaticResource MainColor}"
                     Text="{Binding Password, Mode=TwoWay}"
-                    Placeholder="enter your password here.."/>
+                    Placeholder="enter your password here.."
+                    TextColor="White"/>
             </Grid>
             <StackLayout
                 HorizontalOptions="Center"

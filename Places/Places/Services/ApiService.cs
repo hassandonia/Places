@@ -12,33 +12,36 @@
 
     public class ApiService
     {
-       public async Task<Response> CheckConnection()
+        public async Task<Response> CheckConnection()
         {
-
             if (!CrossConnectivity.Current.IsConnected)
             {
-                return new Response {
+                return new Response
+                {
                     IsSuccess = false,
-                    Message = "Please turn on your internet status.",
+                    Message = "Please turn on your internet settings.",
                 };
             }
-#pragma warning disable CS0618 // Type or member is obsolete
+
             var isReachable = await CrossConnectivity.Current.IsRemoteReachable(
                 "google.com");
-#pragma warning restore CS0618 // Type or member is obsolete
             if (!isReachable)
             {
-                return new Response {
+                return new Response
+                {
                     IsSuccess = false,
-                    Message = "Please check your internet connection.",
+                    Message = "Check you internet connection.",
                 };
-                
             }
-            return new Response {
-            IsSuccess = true,
-            Message = "OK"
+
+            return new Response
+            {
+                IsSuccess = true,
+                Message = "Ok",
             };
         }
+
+        
 
         public async Task<TokenResponse> GetToken(
             string urlBase,
@@ -268,11 +271,8 @@
                     request,
                     Encoding.UTF8,
                     "application/json");
-
                 var client = new HttpClient();
-
                 client.BaseAddress = new Uri(urlBase);
-
                 var url = string.Format("{0}{1}", servicePrefix, controller);
                 var response = await client.PostAsync(url, content);
 
@@ -306,12 +306,12 @@
         }
 
         public async Task<Response> Put<T>(
-               string urlBase,
-               string servicePrefix,
-               string controller,
-               string tokenType,
-               string accessToken,
-               T model)
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            string tokenType,
+            string accessToken,
+            T model)
         {
             try
             {
@@ -356,14 +356,13 @@
             }
         }
 
-
         public async Task<Response> Delete<T>(
-           string urlBase,
-           string servicePrefix,
-           string controller,
-           string tokenType,
-           string accessToken,
-           T model)
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            string tokenType,
+            string accessToken,
+            T model)
         {
             try
             {

@@ -237,7 +237,7 @@
                 Stock = stock,
             };
             var response = await apiService.Post(
-                "",
+                "http://placesapii.azurewebsites.net",
                 "/api",
                 "Places",
                 mainViewModel.Token.TokenType,

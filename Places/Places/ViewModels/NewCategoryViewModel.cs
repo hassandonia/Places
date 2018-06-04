@@ -117,7 +117,7 @@ namespace Places.ViewModels
             };
             var mainViewModel = MainViewModel.GetInstance();
             var response = await apiService.Post(
-                "",
+                "http://placesapii.azurewebsites.net",
                 "/api",
                 "/Categories",
                 mainViewModel.Token.TokenType,

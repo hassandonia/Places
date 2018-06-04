@@ -134,7 +134,7 @@
             
             var mainViewModel = MainViewModel.GetInstance();
             var response = await apiService.Delete(
-                "",
+                "http://placesapii.azurewebsites.net",
                 "/api",
                 "Categories",
                 mainViewModel.Token.TokenType,
@@ -171,7 +171,7 @@
             }
 
             var mainViewModel = MainViewModel.GetInstance();
-            var response = await apiService.GetList<Category>("http://localhost:50552/",
+            var response = await apiService.GetList<Category>("http://placesapii.azurewebsites.net",
                 "/api", "Categories", mainViewModel.Token.TokenType, mainViewModel.Token.AccessToken);
 
             if (!response.IsSuccess)

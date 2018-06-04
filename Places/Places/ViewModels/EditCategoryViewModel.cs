@@ -117,7 +117,7 @@
             category.Description = Description;
             var mainViewModel = MainViewModel.GetInstance();
             var response = await apiService.Put(
-                "",
+                "http://placesapii.azurewebsites.net",
                 "/api",
                 "Categories",
                 mainViewModel.Token.TokenType,

@@ -192,7 +192,7 @@ namespace Places.ViewModels
             };
 
             var response = await apiService.Post(
-                "",
+                "http://placesapii.azurewebsites.net",
                 "/api",
                 "/Customers",
                 customer);
@@ -208,7 +208,7 @@ namespace Places.ViewModels
             }
 
             var response2 = await apiService.GetToken(
-                "",
+                "http://placesapii.azurewebsites.net",
                 Email,
                 Password);
 
