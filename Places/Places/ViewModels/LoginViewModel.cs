@@ -130,8 +130,8 @@
             dialogService = new DialogService();
             navigationService = new NavigationService();    
 
-            //Email = "hassanbasha@gmail.com";
-            //Password = "123456";
+            Email = "hassanbasha@gmail.com";
+            Password = "123456";
 
             IsEnabled = true;
             IsToggled = true;
@@ -174,7 +174,7 @@
 
             if (!connection.IsSuccess)
             {
-                IsRunning = true;
+                IsRunning = false;
                 IsEnabled = true;
                 await dialogService.ShowMessage("Error", connection.Message);
                 return;

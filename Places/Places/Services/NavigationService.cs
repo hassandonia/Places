@@ -15,7 +15,7 @@
                     break;
 
                 case "MasterView":
-                    Application.Current.MainPage = new MasterView();
+                    Application.Current.MainPage = new NavigationPage(new MasterView());
                     break;
             }
         }
